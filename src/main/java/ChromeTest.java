@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,9 +21,13 @@ public class ChromeTest {
         WebElement loginPassword = driver.findElement(By.xpath("//input[@data-qa='login-password']"));
         WebElement loginButton = driver.findElement(By.xpath("//button[@data-qa='login-button']"));
 
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        // Scroll down by 200 pixels
+        js.executeScript("window.scrollBy(0, 200);");
+
         Thread.sleep(2000);
         loginEmail.click();
-        loginEmail.sendKeys("mohdbahauddin591@gmail.com");
+        loginEmail.sendKeys("mohdbahauddin123@gmail.com");
 
         loginPassword.click();
         loginPassword.sendKeys("Phenomenal$123");
