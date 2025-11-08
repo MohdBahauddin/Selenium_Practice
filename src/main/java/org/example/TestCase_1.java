@@ -41,15 +41,12 @@ public class TestCase_1 {
 
         WebElement genderBtn = driver.findElement(By.xpath("//input[@id='id_gender1']"));
         genderBtn.click();
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
         // Scroll down by 200 pixels
         js.executeScript("window.scrollBy(0, 300);");
 
         WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
         WebElement days = driver.findElement(By.id("days"));
         WebElement month = driver.findElement(By.id("months"));
-//        WebElement year = days.findElement(By.id("uniform-years"));
-
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         password.click();
@@ -63,13 +60,11 @@ public class TestCase_1 {
         select1.selectByIndex(8);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 
-//        Select select2 = new Select(year);
-//        select2.selectByIndex(23);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement yearDropdown = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("years"))
         );
-//        yearDropdown.click();
+
         Select select2 = new Select(yearDropdown);
         select2.selectByIndex(23);
 
@@ -128,6 +123,5 @@ public class TestCase_1 {
         {
             System.out.println("Account Creation Failed");
         }
-
     }
 }
