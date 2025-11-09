@@ -1,5 +1,3 @@
-package org.Automation_Exercise;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
