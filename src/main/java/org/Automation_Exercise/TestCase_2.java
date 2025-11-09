@@ -1,10 +1,12 @@
+package org.Automation_Exercise;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class ChromeTest {
+public class TestCase_2 {
     public static void main(String[] args) throws InterruptedException
     {
         WebDriver driver = new ChromeDriver();
@@ -57,7 +59,7 @@ public class ChromeTest {
 
         String accountDeletedVerification = accountDeleted.getText();
 
-        if(accountDeletedVerification.equals("Account Deleted!"))
+        if(accountDeletedVerification.equals("ACCOUNT DELETED!"))
         {
             System.out.println("Account Deleted Successfully");
         }

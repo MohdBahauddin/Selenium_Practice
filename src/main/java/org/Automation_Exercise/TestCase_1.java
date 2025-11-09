@@ -1,4 +1,4 @@
-package org.example;
+package org.Automation_Exercise;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -115,7 +115,8 @@ public class TestCase_1 {
         WebElement accountCreated = driver.findElement(By.xpath("//b[text() = 'Account Created!']"));
 
         String textToVerify = accountCreated.getText();
-        if(textToVerify.equals("Account Created!"))
+
+        if(textToVerify.equals("ACCOUNT CREATED!"))
         {
             System.out.println("Account Created Succesfully");
         }
