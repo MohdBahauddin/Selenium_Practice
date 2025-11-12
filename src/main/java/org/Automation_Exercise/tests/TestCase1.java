@@ -3,7 +3,6 @@ package org.Automation_Exercise.tests;
 import org.Automation_Exercise.pages.AccountPage;
 import org.Automation_Exercise.BaseTest.BaseTest;
 import org.Automation_Exercise.pages.HomePage;
-import org.Automation_Exercise.pages.SignUpOrLoginPage;
 
 public class TestCase1 extends BaseTest {
 
@@ -18,7 +17,6 @@ public class TestCase1 extends BaseTest {
         HomePage home = new HomePage(driver);
         home.clickLogin();
 
-        SignUpOrLoginPage signup = new SignUpOrLoginPage(driver);
         signup.SignUp("Mohammad Bahauddin Haque", "mohdbahauddin123@gmail.com", "Phenomenal$123");
         signup.fillAddress();
         signup.submitForm();
