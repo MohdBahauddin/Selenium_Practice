@@ -11,8 +11,18 @@ public class HomePage {
     }
 
     By loginLink = By.xpath("//a[@href='/login']");
+    By productsLink = By.xpath("//a[@href='/products']");
+    By deleteButton = By.xpath("//a[@href='/delete_account']");
 
     public void clickLogin(){
         driver.findElement(loginLink).click();
+    }
+
+    public void clickProducts(){
+        driver.findElement(productsLink).click();
+    }
+
+    public void deleteAccount(){
+        driver.findElement(deleteButton).click();
     }
 }
