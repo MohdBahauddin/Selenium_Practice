@@ -26,7 +26,7 @@ public class HomePage {
     By subscriptioinEmail = By.id("susbscribe_email");
     By subscriptionSubmitButton = By.id("subscribe");
     By successMessage = By.xpath("//div[@class='alert-success' and contains(text(),'You have been successfully subscribed!')]");
-
+    By clickCart = By.xpath("//a[@href='/view_cart']");
 
     public void clickLogin(){
         driver.findElement(loginLink).click();
@@ -36,22 +36,33 @@ public class HomePage {
         driver.findElement(productsLink).click();
     }
 
+    public void clickMart(){
+        driver.findElement(clickCart).click();
+    }
+
     public void deleteAccount(){
         driver.findElement(deleteButton).click();
     }
 
     public void subscriptionEmail(String email){
         js.executeScript("window.scrollBy(0,document.body.scrollHeight);");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         driver.findElement(subscriptioinEmail).sendKeys(email);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         driver.findElement(subscriptionSubmitButton).click();
+    }
+
+    public void scrollTillLast(){
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight);");
     }
 
     public String getSuccessMessage() {
         try {
-            // Wait with short polling because message appears briefly
-            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            shortWait.pollingEvery(Duration.ofMillis(100));
-            WebElement msg = shortWait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebElement msg = wait.until(ExpectedConditions.presenceOfElementLocated(
+                            By.xpath("//div[contains(@class,'alert-success')]")
+                    )
+            );
             return msg.getText();
         } catch (Exception e) {
             return "Message not found!";
