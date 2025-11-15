@@ -29,6 +29,9 @@ public class ProductsPage {
     By addToCartButton = By.xpath("//div[@class='product-overlay']//a[@data-product-id='1']");
     By addToCartButton1 = By.xpath("//div[@class='product-overlay']//a[@data-product-id='2']");
     By continueShoppingButton = By.xpath("//button[@class='btn btn-success close-modal btn-block']");
+    By viewProductsButton = By.xpath("//a[@href='/product_details/1']");
+    By productQuantity = By.id("quantity");
+    By addToCartButton2 = By.xpath("//button[@type='button']");
 
     public void navigateToProductsPage(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -79,6 +82,31 @@ public class ProductsPage {
         wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton)).click();
     }
 
+    public void viewProduct(){
+       js.executeScript("window.scrollBy(0,600);");
+       driver.findElement(viewProductsButton).click();
+       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+       String str = driver.getTitle();
+       System.out.println(str);
 
+    }
+
+    public void verifyProductdetailsPage(){
+        String str = driver.getTitle();
+        if(str.equals("Automation Exercise - Product Details")){
+            System.out.println("We are at products details page");
+        }
+        else{
+            System.out.println("We are not at products details page");
+        }
+    }
+
+    public void increaseQuantity(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.findElement(productQuantity).clear();
+        driver.findElement(productQuantity).sendKeys("4");
+        driver.findElement(addToCartButton2).click();
+        driver.findElement(continueShoppingButton).click();
+    }
 
 }
