@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.time.Duration;
+
 
 public class SignUpOrLoginPage {
     WebDriver driver;
@@ -49,7 +51,8 @@ public class SignUpOrLoginPage {
     By signupName    = By.xpath("//form[@action='/signup']//input[@data-qa='signup-name']");
     By signupEmail   = By.xpath("//form[@action='/signup']//input[@data-qa='signup-email']");
     By signupButton  = By.xpath("//form[@action='/signup']//button[@data-qa='signup-button']");
-
+    By continueButton = By.xpath("//a[text()='Continue']");
+    By loggedInAs = By.xpath("//b[text()='John Wick']");
 
     public void SignUp(String userName, String userEmail, String userPassword){
         js.executeScript("window.scrollBy(0,200);");
@@ -96,6 +99,7 @@ public class SignUpOrLoginPage {
     }
 
     public void submitForm() {
+        js.executeScript("window.scrollBy(0,300);");
         driver.findElement(createAccountBtn).click();
     }
 
@@ -110,6 +114,21 @@ public class SignUpOrLoginPage {
         }
         else{
             System.out.println("Account Deletion Failed");
+        }
+    }
+
+    public void clickContinue(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.findElement(continueButton).click();
+    }
+
+    public void verifyLogin(){
+        String str = driver.findElement(loggedInAs).getText();
+        if(str.equals("John Wick")){
+            System.out.println("Logged in successfully as John Wick");
+        }
+        else{
+            System.out.println("Login Failed");
         }
     }
 }

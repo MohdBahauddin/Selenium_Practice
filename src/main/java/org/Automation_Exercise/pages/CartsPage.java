@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
@@ -24,8 +26,11 @@ public class CartsPage {
     By price2 = By.xpath("//p[text()='Rs. 400']");
     By quantity1 = By.xpath("//button[text()='1']");
     By quantity2 = By.xpath("//button[text()='4']");
-//    By quantity2 = By.xpath("//button[text()='1']");
-
+    By proceedToCheckoutButton = By.xpath("//a[@class='btn btn-default check_out']");
+    By continueToCartButton = By.xpath("//button[text()='Continue On Cart']");
+    By registerAndLoginButton = By.xpath("//u[text()='Register / Login']");
+    By description = By.xpath("//textarea[@class='form-control']");
+    By placeOrderButton = By.xpath("//a[@href='/payment']");
 
     public void NavigateToCartsPage(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -84,5 +89,27 @@ public class CartsPage {
             System.out.println("Quantity is not verified");
         }
     }
+
+    public void proceedToCheckout(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.findElement(proceedToCheckoutButton).click();
+        driver.findElement(registerAndLoginButton).click();
+    }
+
+    public void proceedToCheckout1(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.findElement(proceedToCheckoutButton).click();
+//        driver.findElement(registerAndLoginButton).click();
+    }
+
+    public void fillDescription(String fillDescription){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        js.executeScript("window.scrollBy(0,900);");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.findElement(description).sendKeys(fillDescription);
+        driver.findElement(placeOrderButton).click();
+    }
+
+
 
 }

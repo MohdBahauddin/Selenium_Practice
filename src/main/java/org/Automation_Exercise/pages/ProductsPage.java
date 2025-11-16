@@ -52,7 +52,7 @@ public class ProductsPage {
     }
 
     public Boolean verifyProductIsVisible(){
-        js.executeScript("window.scrollBy(0,50 0);");
+        js.executeScript("window.scrollBy(0,500);");
         return driver.findElement(product).isDisplayed();
     }
 
@@ -80,6 +80,22 @@ public class ProductsPage {
 
         wait.until(ExpectedConditions.elementToBeClickable(addToCartButton1)).click();
         wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton)).click();
+    }
+
+    public void addToCart1(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        js.executeScript("window.scrollBy(0,600);");
+
+        // 1st Product
+        WebElement image1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("(//div[@class='product-image-wrapper'])[1]")));
+        actions.moveToElement(image1).perform();
+
+        // Wait until button is clickable (no overlay)
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton)).click();
+
     }
 
     public void viewProduct(){
