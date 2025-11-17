@@ -21,5 +21,15 @@
             <version>4.38.0</version>
         </dependency>
     </dependencies>
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+            <mainClass>org.Automation_Exercise.tests.TestCase1</mainClass>
+        </configuration>
+    </plugin>
+
+
 
 </project>

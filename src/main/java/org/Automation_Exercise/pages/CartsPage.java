@@ -31,6 +31,8 @@ public class CartsPage {
     By registerAndLoginButton = By.xpath("//u[text()='Register / Login']");
     By description = By.xpath("//textarea[@class='form-control']");
     By placeOrderButton = By.xpath("//a[@href='/payment']");
+    By deleteProductFromCart = By.xpath("//a[@data-product-id='1']");
+    By emptyCArt = By.xpath("//b[text()='Cart is empty!']");
 
     public void NavigateToCartsPage(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -110,6 +112,21 @@ public class CartsPage {
         driver.findElement(placeOrderButton).click();
     }
 
+    public void deleteProductFromCart(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        js.executeScript("window.scrollBy(0,200);");
+        driver.findElement(deleteProductFromCart).click();
+    }
 
+    public void verifyProductRemovedFromCart(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        String str = driver.findElement(emptyCArt).getText();
+        if(str.equals("Cart is empty!")){
+            System.out.println("Product is removed from Cart");
+        }
+        else{
+            System.out.println("Prodduct is not removed from cart");
+        }
+    }
 
 }

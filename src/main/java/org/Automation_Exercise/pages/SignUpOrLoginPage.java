@@ -90,8 +90,8 @@ public class SignUpOrLoginPage {
     public void login(String userEmail, String userPassword){
         js.executeScript("window.scrollBy(0,200);");
 
-        driver.findElement(loginEmail).sendKeys("mohdbahauddin123@gmail.com");
-        driver.findElement(loginPassword).sendKeys("Phenomenal$123");
+        driver.findElement(loginEmail).sendKeys(userEmail);
+        driver.findElement(loginPassword).sendKeys(userPassword);
     }
 
     public void submitLogin(){

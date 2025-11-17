@@ -28,6 +28,19 @@ public class HomePage {
     By successMessage = By.xpath("//div[@class='alert-success' and contains(text(),'You have been successfully subscribed!')]");
     By clickCart = By.xpath("//a[@href='/view_cart']");
 
+    public By getCategoryHeading(String categoryName) {
+        return By.xpath("//h2[text()='" + categoryName + "']");
+    }
+
+    public By clickCategory(String categoryType){
+        return By.xpath("//h4[@class='panel-title']//a[@href='" +categoryType+"']");
+    }
+
+    public By subCategory(String subCategoryType){
+        return By.xpath("//a[@href='" +subCategoryType +"']");
+    }
+
+
     public void clickLogin(){
         driver.findElement(loginLink).click();
     }
@@ -68,6 +81,32 @@ public class HomePage {
             return "Message not found!";
         }
     }
+
+    public void clickCategory1(String categoryType1, String subCategoryType1){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        By category = clickCategory(categoryType1);
+        By subCategory = subCategory(subCategoryType1);
+
+        js.executeScript("window.scrollBy(0,600);");
+        driver.findElement(category).click();
+        driver.findElement(subCategory).click();
+    }
+
+    public void verifyCategory(String expectedCategory, String expectedText) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+
+        By heading = getCategoryHeading(expectedCategory);
+
+        String actualText = driver.findElement(heading).getText();
+
+
+        if (actualText.equals(expectedText)) {
+            System.out.println(actualText);
+        } else {
+            System.out.println("Category NOT verified");
+        }
+    }
+
 }
 
 
