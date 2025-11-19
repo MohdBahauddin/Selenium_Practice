@@ -17,5 +17,10 @@ public class TestCase19 extends BaseTest {
 
         ProductsPage product = new ProductsPage(driver);
         product.verifyBrand();
+        product.clickBrand("Polo");
+        product.verifyBrandPage("Polo");
+        product.scrollPage();
+        product.clickBrand("H&M");
+        product.verifyBrandPage("H&M");
     }
 }

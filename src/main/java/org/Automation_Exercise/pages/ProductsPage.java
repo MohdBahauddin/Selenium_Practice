@@ -34,6 +34,13 @@ public class ProductsPage {
     By addToCartButton2 = By.xpath("//button[@type='button']");
     By brands = By.xpath("//h2[text()='Brands']");
     By polo = By.xpath("//a[@href='/brand_products/Polo']");
+    public By getBrandName(String brand){
+        return By.xpath("//a[@href='/brand_products/"+brand+"']");
+    }
+
+    public void scrollPage(){
+        js.executeScript("window.scrollBy(0,200);");
+    }
 
     public void navigateToProductsPage(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -140,8 +147,20 @@ public class ProductsPage {
         }
     }
 
-    public void clickBrand(){
-        driver.findElement(polo).click();
+    public void clickBrand(String brandName){
+//        driver.findElement(polo).click();
+        By brand = getBrandName(brandName);
+        driver.findElement(brand).click();
+    }
 
+
+    public void verifyBrandPage(String brand){
+        String str = driver.getTitle();
+        if(str.equals("Automation Exercise - "+brand+" Products")){
+            System.out.println("Brand page is verified for " + brand);
+        }
+        else{
+            System.out.println("Brand page is not verified " + brand);
+        }
     }
 }
