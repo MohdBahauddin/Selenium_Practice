@@ -26,8 +26,8 @@ public class ProductsPage {
     By searchProducts = By.id("search_product");
     By searchButton = By.id("submit_search");
     By product = By.xpath("//div[@class='product-overlay']");
-    By addToCartButton = By.xpath("//div[@class='product-overlay']//a[@data-product-id='1']");
-    By addToCartButton1 = By.xpath("//div[@class='product-overlay']//a[@data-product-id='2']");
+//    By addToCartButton = By.xpath("//div[@class='product-overlay']//a[@data-product-id='1']");
+//    By addToCartButton1 = By.xpath("//div[@class='product-overlay']//a[@data-product-id='2']");
     By continueShoppingButton = By.xpath("//button[@class='btn btn-success close-modal btn-block']");
     By viewProductsButton = By.xpath("//a[@href='/product_details/1']");
     By productQuantity = By.id("quantity");
@@ -37,10 +37,18 @@ public class ProductsPage {
     public By getBrandName(String brand){
         return By.xpath("//a[@href='/brand_products/"+brand+"']");
     }
+    public By addToCartButton(String i){
+        return By.xpath("//div[@class='product-overlay']//a[@data-product-id='"+i+"']");
+    }
 
     public void scrollPage(){
         js.executeScript("window.scrollBy(0,200);");
     }
+
+    public void scrollPage1(){
+        js.executeScript("window.scrollBy(0,600);");
+    }
+
 
     public void navigateToProductsPage(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -71,41 +79,128 @@ public class ProductsPage {
 
         js.executeScript("window.scrollBy(0,600);");
 
-        // 1st Product
-        WebElement image1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+        // ************** 1st Product **************
+        WebElement product1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("(//div[@class='product-image-wrapper'])[1]")));
-        actions.moveToElement(image1).perform();
 
-        // Wait until button is clickable (no overlay)
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton)).click();
+        actions.moveToElement(product1).perform();
 
-        // 2nd Product
-        WebElement image2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+        WebElement add1 = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("(//div[@class='product-overlay']//a[@data-product-id='1'])")));
+
+        add1.click();
+
+        WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[text()='Continue Shopping']")));
+        continueBtn.click();
+
+        // ************** 2nd Product **************
+        WebElement product2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("(//div[@class='product-image-wrapper'])[2]")));
 
-        js.executeScript("arguments[0].scrollIntoView(true);", image2);
-        actions.moveToElement(image2).perform();
+        js.executeScript("arguments[0].scrollIntoView(true);", product2);
+        actions.moveToElement(product2).perform();
 
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton1)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton)).click();
+        WebElement add2 = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("(//div[@class='product-overlay']//a[@data-product-id='2'])")));
+
+        add2.click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[text()='Continue Shopping']"))).click();
     }
 
-    public void addToCart1(){
+
+//    public void addToCart1(String i){
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//        js.executeScript("window.scrollBy(0,600);");
+//
+//        // 1st Product
+//        WebElement image1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("(//div[@class='product-image-wrapper'])["+i+"]")));
+//        actions.moveToElement(image1).perform();
+//
+//        // Wait until button is clickable (no overlay)
+//        By addToCartbutton1 = addToCartButton(i);
+//        wait.until(ExpectedConditions.elementToBeClickable(addToCartbutton1)).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton)).click();
+//
+//    }
+
+    public void addToCart1() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         js.executeScript("window.scrollBy(0,600);");
 
-        // 1st Product
-        WebElement image1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+        // ************** 1st Product **************
+        WebElement product1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("(//div[@class='product-image-wrapper'])[1]")));
-        actions.moveToElement(image1).perform();
 
-        // Wait until button is clickable (no overlay)
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton)).click();
+        actions.moveToElement(product1).perform();
 
+        WebElement add1 = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("(//div[@class='product-overlay']//a[@data-product-id='1'])")));
+
+        add1.click();
+
+        WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[text()='Continue Shopping']")));
+        continueBtn.click();
     }
+
+//    public void addToCart2(String i, String j) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+////        js.executeScript("window.scrollBy(0,650);");
+//
+//        // ************** 1st Product **************
+//        WebElement product1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("(//div[@class='product-image-wrapper'])["+i+"]")));
+//
+//        actions.moveToElement(product1).perform();
+//
+//        WebElement add1 = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("(//div[@class='product-overlay']//a[@data-product-id='"+j+"'])")));
+//
+//        add1.click();
+//
+//        WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//button[text()='Continue Shopping']")));
+//        continueBtn.click();
+//    }
+
+public void addToCart2(String index, String productId) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12));
+
+    // Locate product card safely
+    By productCard = By.xpath("(//div[@class='product-image-wrapper'])[" + index + "]");
+    WebElement product = wait.until(ExpectedConditions.visibilityOfElementLocated(productCard));
+
+    // Scroll into view properly
+    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", product);
+
+    // Hover
+    actions.moveToElement(product).pause(Duration.ofMillis(300)).perform();
+
+    // Overlay button that appears after hover
+    By addToCartBtn = By.xpath("//a[@data-product-id='" + productId + "']");
+
+    // Wait specifically for visible AND clickable
+    WebElement addButton = wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartBtn));
+    wait.until(ExpectedConditions.elementToBeClickable(addButton));
+
+    // Click reliably using JS (this site is glitchy)
+    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addButton);
+
+    // Continue Shopping
+    WebElement continueBtn = wait.until(
+            ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Continue Shopping']"))
+    );
+    continueBtn.click();
+}
+
+
 
     public void viewProduct(){
        js.executeScript("window.scrollBy(0,600);");

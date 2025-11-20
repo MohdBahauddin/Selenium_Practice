@@ -19,7 +19,7 @@ public class TestCase1 extends BaseTest {
         home.clickLogin();
 
         SignUpOrLoginPage signup = new SignUpOrLoginPage(driver);
-        signup.SignUp("Mohammad Bahauddin Haque", "mohdbahauddin123@gmail.com", "Phenomenal$123");
+        signup.SignUp("John Wick", "johnvicks58@gmail.com", "JohnCena@123");
         signup.fillAddress();
         signup.submitForm();
 

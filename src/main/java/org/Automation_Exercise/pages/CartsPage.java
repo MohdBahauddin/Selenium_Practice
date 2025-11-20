@@ -129,4 +129,20 @@ public class CartsPage {
         }
     }
 
+    public void verifyProducts(String productId){
+        WebDriverWait  wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String product = "//a[@href='/product_details/"+productId+"']";
+
+        WebElement productRow = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(product))
+        );
+
+        if(productRow.isDisplayed()){
+            System.out.println("Product ID " + productId + " is visible in the cart");
+        }
+        else{
+            throw new AssertionError("Product ID  " + product + " is not visible in the cart");
+        }
+    }
 }

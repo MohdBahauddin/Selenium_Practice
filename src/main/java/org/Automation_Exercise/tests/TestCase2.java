@@ -23,7 +23,7 @@ public class TestCase2 extends BaseTest {
         home.clickLogin();
 
         SignUpOrLoginPage signup = new SignUpOrLoginPage(driver);
-        signup.login("mohdbahauddin123@gmail.com", "Phenomenal$123");
+        signup.login("johnvicks58@gmail.com", "JohnCena@123");
         signup.submitLogin();
 
         home.deleteAccount();
