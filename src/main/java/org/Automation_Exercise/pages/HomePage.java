@@ -92,6 +92,10 @@ public class HomePage {
         driver.findElement(subCategory).click();
     }
 
+    public void scrollToBottom() {
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+    }
+
     public void verifyCategory(String expectedCategory, String expectedText) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 
@@ -105,6 +109,46 @@ public class HomePage {
         } else {
             System.out.println("Category NOT verified");
         }
+    }
+
+    public void scrollUp(){
+        js.executeScript("window.scrollBy(0,-300);");
+    }
+
+    public void addToCart(String productId){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        By continueShoppingButton = By.xpath("//button[@class='btn btn-success close-modal btn-block']");
+        By addToCartButton = By.xpath("//div[@id='recommended-item-carousel']//a[@data-product-id='"+productId+"']");
+        driver.findElement(addToCartButton).click();
+        driver.findElement(continueShoppingButton).click();
+    }
+
+    public void clickRecommendedProduct(String productId) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Scroll to recommended items
+        WebElement rec = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("recommended-item-carousel"))
+        );
+        js.executeScript("arguments[0].scrollIntoView(true);", rec);
+        js.executeScript("window.scrollBy(0, -180);"); // adjust
+
+        // Product inside carousel
+        By prod = By.xpath("//div[@id='recommended-item-carousel']//a[@data-product-id='" + productId + "']");
+
+        WebElement product = wait.until(
+                ExpectedConditions.presenceOfElementLocated(prod)
+        );
+
+        // Click via JS (most reliable)
+        js.executeScript("arguments[0].click();", product);
+    }
+
+    public void clickContinueShopping(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        By continueShoppingButton = By.xpath("//button[@class='btn btn-success close-modal btn-block']");
+        driver.findElement(continueShoppingButton).click();
     }
 
 }

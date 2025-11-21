@@ -50,6 +50,7 @@ public class TestCase20 extends BaseTest {
         cart.verifyProducts("28");
         cart.verifyProducts("29");
         product.scrollPage1();
+
         cart.verifyProducts("30");
         cart.verifyProducts("31");
         cart.verifyProducts("43");

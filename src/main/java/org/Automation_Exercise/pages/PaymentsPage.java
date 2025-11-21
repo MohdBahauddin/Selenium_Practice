@@ -22,6 +22,8 @@ public class PaymentsPage {
     By expiryYear = By.xpath("//input[@data-qa='expiry-year']");
     By payButton = By.xpath("//button[@data-qa='pay-button']");
     By paymentMessage = By.xpath("//div[@id='success_message']");
+    By downloadInvoiceButton = By.xpath("//a[@href='/download_invoice/500']");
+    By continuewButton = By.xpath("//a[@data-qa='continue-button']");
 
     public void fillPaymentDetails(String name, String number, String CVC, String expiration, String year){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -41,5 +43,10 @@ public class PaymentsPage {
 
     public void clickPaymentButton(){
         driver.findElement(payButton).click();
+    }
+
+    public void downloadInvoice(){
+        driver.findElement(downloadInvoiceButton).click();
+        driver.findElement(continuewButton).click();
     }
 }

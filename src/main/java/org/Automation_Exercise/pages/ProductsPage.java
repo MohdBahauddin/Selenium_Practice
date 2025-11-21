@@ -34,6 +34,11 @@ public class ProductsPage {
     By addToCartButton2 = By.xpath("//button[@type='button']");
     By brands = By.xpath("//h2[text()='Brands']");
     By polo = By.xpath("//a[@href='/brand_products/Polo']");
+    By userName = By.id("name");
+    By userEmail = By.id("email");
+    By review = By.id("review");
+    By submit = By.id("button-review");
+
     public By getBrandName(String brand){
         return By.xpath("//a[@href='/brand_products/"+brand+"']");
     }
@@ -110,24 +115,6 @@ public class ProductsPage {
                 By.xpath("//button[text()='Continue Shopping']"))).click();
     }
 
-
-//    public void addToCart1(String i){
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//
-//        js.executeScript("window.scrollBy(0,600);");
-//
-//        // 1st Product
-//        WebElement image1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                By.xpath("(//div[@class='product-image-wrapper'])["+i+"]")));
-//        actions.moveToElement(image1).perform();
-//
-//        // Wait until button is clickable (no overlay)
-//        By addToCartbutton1 = addToCartButton(i);
-//        wait.until(ExpectedConditions.elementToBeClickable(addToCartbutton1)).click();
-//        wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton)).click();
-//
-//    }
-
     public void addToCart1() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -149,26 +136,6 @@ public class ProductsPage {
         continueBtn.click();
     }
 
-//    public void addToCart2(String i, String j) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//
-////        js.executeScript("window.scrollBy(0,650);");
-//
-//        // ************** 1st Product **************
-//        WebElement product1 = wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                By.xpath("(//div[@class='product-image-wrapper'])["+i+"]")));
-//
-//        actions.moveToElement(product1).perform();
-//
-//        WebElement add1 = wait.until(ExpectedConditions.elementToBeClickable(
-//                By.xpath("(//div[@class='product-overlay']//a[@data-product-id='"+j+"'])")));
-//
-//        add1.click();
-//
-//        WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(
-//                By.xpath("//button[text()='Continue Shopping']")));
-//        continueBtn.click();
-//    }
 
 public void addToCart2(String index, String productId) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12));
@@ -258,4 +225,34 @@ public void addToCart2(String index, String productId) {
             System.out.println("Brand page is not verified " + brand);
         }
     }
+
+    public void writeReview(String name, String emailAddress){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        js.executeScript("window.scrollBy(0,600);");
+        driver.findElement(userName).sendKeys(name);
+        driver.findElement(userEmail).sendKeys(emailAddress);
+        driver.findElement(review).sendKeys("Good Product");
+        driver.findElement(submit).click();
+    }
+
+    public void verifyReviewSuccessMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        By messageLocator = By.cssSelector(".alert-success");
+        // You can replace with exact locator if needed
+
+        WebElement msgElement = wait.until(
+                ExpectedConditions.presenceOfElementLocated(messageLocator)
+        );
+
+        // Read text quickly before it disappears
+        String actualMessage = msgElement.getText().trim();
+
+        if (actualMessage.contains("Thank you for your review.")) {
+            System.out.println("Success message verified!");
+        } else {
+            throw new AssertionError("Success message NOT found. Actual: " + actualMessage);
+        }
+    }
+
 }
