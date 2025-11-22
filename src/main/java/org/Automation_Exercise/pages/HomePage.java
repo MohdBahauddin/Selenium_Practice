@@ -27,6 +27,9 @@ public class HomePage {
     By subscriptionSubmitButton = By.id("subscribe");
     By successMessage = By.xpath("//div[@class='alert-success' and contains(text(),'You have been successfully subscribed!')]");
     By clickCart = By.xpath("//a[@href='/view_cart']");
+    By subscriptionText = By.xpath("//h2[text()='Subscription']");
+    By arrow = By.xpath("//i[@class='fa fa-angle-up']");
+    By automationEngineersText = By.xpath("(//h2[contains(text(),'Full-Fledged practice website for Automation Engineers')])[1]");
 
     public By getCategoryHeading(String categoryName) {
         return By.xpath("//h2[text()='" + categoryName + "']");
@@ -54,6 +57,7 @@ public class HomePage {
     }
 
     public void deleteAccount(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         driver.findElement(deleteButton).click();
     }
 
@@ -151,6 +155,35 @@ public class HomePage {
         driver.findElement(continueShoppingButton).click();
     }
 
+    public void verifySubscription(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        String str = driver.findElement(subscriptionText).getText();
+        if(str.equals("SUBSCRIPTION")){
+            System.out.println("Subscription is verified");
+        }
+        else{
+            System.out.println("Subscription is not verified");
+        }
+    }
+
+    public void clickArrow(){
+        driver.findElement(arrow).click();
+    }
+
+    public void verifyAutomationEngineersText(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        String str = driver.findElement(automationEngineersText).getText();
+        if(str.equals("Full-Fledged practice website for Automation Engineers")){
+            System.out.println("'Full-Fledged practice website for Automation Engineers is visible");
+        }
+        else{
+            System.out.println("'Full-Fledged practice website for Automation Engineers is not visible");
+        }
+    }
+
+    public void scrollUpToTheTop(){
+        js.executeScript("window.scrollTo(0,0);");
+    }
 }
 
 

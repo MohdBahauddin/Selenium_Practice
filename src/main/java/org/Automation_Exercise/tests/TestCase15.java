@@ -23,7 +23,7 @@ public class TestCase15 extends BaseTest {
         signUp.verifyLogin();
 
         ProductsPage product = new ProductsPage(driver);
-        product.addToCart1();
+        product.addToCart2("1","1");
 
         CartsPage cart = new CartsPage(driver);
         cart.NavigateToCartsPage();
